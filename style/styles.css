@@ -1,0 +1,255 @@
+:root {
+  --bg-light: #f6f6f6;
+  --bg-dark: #121212;
+  --text-light: #111827;
+  --text-dark: #f9fafb;
+  --primary: #4f46e5;
+  --primary-hover: #4338ca;
+  --warn: #e11d48;
+  --border-radius: 8px;
+  --transition-speed: 0.3s;
+  --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --slider-bg-black:rgba(31,31,31,0.75);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: var(--bg-light);
+  color: var(--text-light);
+  transition: background-color var(--transition-speed), color var(--transition-speed);
+  max-width: 500px;
+  min-height: 100vh;
+  margin: 0 auto;
+  border:0px;
+  border-left: 1px;
+  border-right: 1px;
+  
+  
+  border-style:ridge;
+}
+
+body.dark {
+  background-color: var(--bg-dark);
+  color: var(--text-dark);
+}
+
+header nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: var(--primary);
+  color: white;
+  box-shadow: var(--box-shadow);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+main {
+  padding: 20px;
+  animation: fadeSlideIn 0.4s ease-in-out;
+}
+
+.tool-section label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-weight: 600;
+}
+
+.tool-section textarea,
+.tool-section input,
+.tool-section button {
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 0.6rem;
+  font-size: 1rem;
+  border-radius: var(--border-radius);
+  border: 1px solid #ccc;
+  transition: all 0.3s ease;
+}
+
+.tool-section input,
+.tool-section textarea {
+  background: white;
+}
+
+body.dark .tool-section input,
+body.dark .tool-section textarea {
+  background: #1f1f1f;
+  color: var(--text-dark);
+  border: 1px solid #444;
+}
+
+.tool-section button {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  margin-top: 1rem;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: var(--box-shadow);
+  transform: scale(1);
+  transition: transform 0.2s ease, background-color var(--transition-speed);
+}
+
+.tool-section button:hover {
+  background-color: var(--primary-hover);
+  transform: scale(1.02);
+}
+
+.tool-section button:active {
+  transform: scale(0.98);
+}
+
+.tool-section .unsecured {
+  background-color: var(--warn);
+}
+
+#outputButtons button {
+  margin: 0.25rem 0;
+}
+
+.modal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 1;
+  transition: opacity var(--transition-speed);
+}
+
+.modal.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.modal-content {
+  background: white;
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  width: 90%;
+  max-width: 400px;
+  box-shadow: var(--box-shadow);
+  transform: scale(1);
+  animation: zoomIn 0.3s ease;
+}
+
+body.dark .modal-content {
+  background: #1f1f1f;
+  color: var(--text-dark);
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+@media (min-width: 600px) {
+  .tool-section textarea {
+    height: 150px;
+  }
+}
+
+/* Animations */
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 30px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  top: 0; left: 0;
+  right: 0; bottom: 0;
+  background-color: rgba(31,31,31,0.75);
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 6px;
+  font-size: 0.8rem;
+}
+
+.slider i {
+  color: rgba(31,31,31,0.75);
+  opacity: 0.6;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.toggle-switch input:checked + .slider {
+  background-color: #ccc;
+}
+
+.toggle-switch input:checked + .slider .fa-sun {
+  opacity: 0;
+  transform: translateX(-20px) rotate(-90deg);
+}
+
+.toggle-switch input:checked + .slider .fa-moon {
+  opacity: 1;
+  transform: translateX(0) rotate(0deg);
+}
+
+.slider .fa-sun {
+  opacity: 1;
+  transform: translateX(0) rotate(0deg);
+}
+
+.slider .fa-moon {
+  opacity: 0;
+  transform: translateX(20px) rotate(90deg);
+
+}
+.icon{
+  width: 20px;
+  height: 20px;
+}
